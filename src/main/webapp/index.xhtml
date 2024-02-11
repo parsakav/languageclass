@@ -1,0 +1,167 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:security="http://www.springframework.org/security/tags"
+>
+<f:view>
+    <h:head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Index</title>
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+        </link>
+        <script type="text/javascript" src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+
+    </h:head>
+    <h:body>
+
+
+    <!--  <ui:include src="header.xhtml" /> -->
+        <security:authorize access="isAuthenticated()">
+
+
+
+            <security:authorize access="hasRole('ADMIN')" >
+
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Admin Panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item" >
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+            </security:authorize>
+            <security:authorize access="hasRole('USER')" >
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+
+                        <li class="nav-item" >
+
+                        </li>
+                    </ul>
+                </nav>
+<br></br>
+                <div class="container" >
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+
+                            <td scope="col" >#</td>
+                            <td scope="col" >Start Date</td>
+                            <td scope="col" >Second day</td>
+                            <td scope="col" >End Date</td>
+
+                            <td scope="col" >Hour (24)</td>
+                            <td scope="col" >Techaer</td>
+                            <td scope="col" >Language</td>
+                            <td scope="col">Capacity</td>
+                            <td scope="col" >Studens number</td>
+                            <td scope="col" width="50">Reserve</td>
+                            <td scope="col" width="50">Lessions</td>
+
+                        </tr>
+
+                        </thead>
+                        <tbody>
+
+                        <ui:repeat value="#{adminController.periods}" var="item">
+                            <tr>
+
+                                <td scope="row" > <h:outputLabel value="#{item.id}" /></td>
+                                <td scope="row" > <h:outputLabel value="#{item.startdate}" /></td>
+                                <td scope="row" > <h:outputLabel value="#{item.seconddayinweek}" /></td>
+                                <td scope="row" > <h:outputLabel value="#{item.enddate}" /></td>
+                                <td scope="row" > <h:outputLabel value="#{item.hour}" /></td>
+                                <td scope="row" >
+                                    <h:form>
+                                    <h:commandButton  styleClass="btn btn-info btn-block" action="#{teacherController.teacherpage}"  value="#{item.teacher.teachrname}">
+                                        <f:param name="teachername" value="#{item.teacher.teachrname}" />
+
+
+                                    </h:commandButton>
+                                    </h:form>
+                                </td>
+                                <td scope="row" > <h:outputLabel value="#{item.language.langname}" /></td>
+                                <td scope="row" > <h:outputLabel value="#{item.maxstudent}" /></td>
+                                <td scope="row" > <h:outputLabel value="#{item.usersnum}" /></td>
+                                <td scope="row" >
+                                    <h:inputHidden id="hide" value="#{item.id}"></h:inputHidden>
+                                    <h:form>
+                                        <h:commandButton   styleClass="#{item.maxstudent != item.usersnum ? 'btn btn-info btn-block': 'btn text-muted'}" action="#{productController.buy}"   value="Reserve">
+                                            <f:param name="id" value="#{item.id}" />
+
+
+                                        </h:commandButton>
+                                    </h:form>
+                                </td>   <td scope="row" >
+                                    <h:form>
+                                        <h:commandButton    action="#{lessionController.lessionpage}"  styleClass="btn btn-info btn-block"  value="Lessions">
+                                            <f:param name="periodid" value="#{item.id}" />
+
+
+                                        </h:commandButton>
+                                    </h:form>
+                                </td>
+                            </tr>
+
+                        </ui:repeat>
+
+                        </tbody>
+                    </table>
+                </div>
+            </security:authorize>
+
+        </security:authorize>
+        <security:authorize access="!isAuthenticated()">
+
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Signup</a>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </security:authorize>
+<p:outputLabel value="#{productController.error}" styleClass="text-warning"/>
+        #{productController.setError("")}
+
+
+    </h:body>
+
+</f:view>
+</html>

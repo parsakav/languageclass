@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+>
+<f:view>
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+        </link>
+        <script type="text/javascript" src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+        <title>Signup</title>
+
+    </h:head>
+    <h:body>
+        <br>
+        </br>
+        <div class="container">
+            <div class="card">
+                <h:form class="text-center border border-light p-5"  method="post">
+
+                    <p class=" h4 mb-4">Sign up</p>
+
+                    <!-- Email -->
+                    <h:inputText  styleClass="form-control mb-4" id="username" a:placeholder="Username" value="#{signupController.username}" required="true" requiredMessage="Username is required"/><br/>
+
+                    <!-- Password -->
+                    <h:inputText styleClass="form-control mb-4" id="pass" value="#{signupController.password}" a:placeholder="Passwprd" required="true" requiredMessage="Username is required"/><br/>
+                    <h:inputText styleClass="form-control mb-4" id="fullname" value="#{signupController.fullname}" a:placeholder="Fullname" required="true" requiredMessage="Username is required"/><br/>
+
+
+
+                    <h:inputText a:placeholder="Phonenumber" styleClass="form-control mb-4" id="phonenumber" value="#{signupController.phonenumber}" required="true" requiredMessage="Username is required"/><br/>
+
+                    <!-- Sign in button -->
+                    <h:commandButton styleClass="btn btn-info btn-block my-4" id="submit-button" value="submit" action="#{signupController.onSubmit()}"/>
+
+                    <!-- Register -->
+                    <p>You have an account?
+                        <a  class="" href="/login">Login</a>
+                    </p>
+
+                </h:form>
+                <!-- Default form login -->
+            </div>
+
+        </div>
+    </h:body>
+
+</f:view>
+</html>

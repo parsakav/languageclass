@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<f:view>
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Index</title>
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+        </link>
+        <script type="text/javascript" src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+
+    </h:head>
+    <h:body>
+
+        <div class="container-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+
+                    <td scope="col" >#</td>
+                    <td scope="col" >Start Date</td>
+                    <td scope="col" >Second day</td>
+                    <td scope="col" >Hour (24)</td>
+                    <td scope="col" >Techaer Name</td>
+                    <td scope="col" >Language</td>
+                    <td scope="col">Capacity</td>
+                    <td scope="col" >Lession name</td>
+                    <td scope="col" width="50">Add Lession</td>
+                    <td scope="col" width="50">Submit</td>
+                </tr>
+
+                </thead>
+                <tbody>
+                <h:form>
+                    <tr>
+                        <td scope="row"></td>
+                        <td scope="row" ><h:inputText a:placeholder="Start Date" id="sdate" value="#{adminController.startdate}" required="true" >
+                            <f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
+
+                        </h:inputText></td>
+
+                        <td scope="row" >
+                            <h:inputText id="secondday" a:placeholder="Second day" value="#{adminController.secondday}" required="true" >
+                            </h:inputText>
+                        </td>
+                        <td scope="row" >
+                            <h:inputText  id="hour" a:placeholder="Hour" value="#{adminController.houer}" required="true" >
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="24" />
+
+
+                            </h:inputText>
+                        </td>
+                        <td scope="row" >
+                            <h:inputText id="teachername" a:placeholder="Teacher name" value="#{adminController.teachername}" required="true" >
+                            </h:inputText>
+                        </td>
+                        <td scope="row" >
+                            <h:inputText id="language" a:placeholder="Language" value="#{adminController.language}" required="true" >
+                            </h:inputText>
+                        </td>
+                        <td scope="row" >
+                            <h:inputText id="maxstudent" a:placeholder="maxstudent" value="#{adminController.number}" required="true" >
+                            </h:inputText>
+                        </td>
+
+
+                        <td scope="row" >
+                            <h:inputText id="lessionname" a:placeholder="Lession name" value="#{adminController.lessionname}" required="true" >
+                            </h:inputText>
+                        </td>
+
+
+                        <td scope="row" >
+                            <h:commandButton  styleClass="btn btn-info btn-block " action="#{adminController.submitLession}"  value="Add lession name">
+                                <f:ajax execute="teachername" />
+                                <f:ajax execute="maxstudent" />
+                                <f:ajax execute="language" />
+                                <f:ajax execute="lessionname"  />
+                                <f:ajax execute="sdate"  />
+                                <f:ajax execute="hour"  />
+                                <f:ajax execute="secondday"  />
+
+                            </h:commandButton>
+                        </td>
+                        <td scope="row" >
+                            <h:commandButton  styleClass="btn btn-info btn-block " action="#{adminController.submit}"  value="Add  Period">
+                                <f:ajax execute="hour"  />
+                                <f:ajax execute="secondday"  />
+                                <f:ajax execute="teachername" />
+                                <f:ajax execute="maxstudent" />
+                                <f:ajax execute="language"  />
+                                <f:ajax execute="lessionname"  />
+                                <f:ajax execute="sdate"  />
+
+                            </h:commandButton>
+                        </td>
+                    </tr>
+                </h:form>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="container">
+<br></br>
+            <table class="table table-striped">
+            <thead>
+            <tr>
+
+                <td scope="col" >#</td>
+                <td scope="col" >Start Date</td>
+                <td scope="col" >Second day</td>
+                <td scope="col" >End Date</td>
+
+                <td scope="col" >Hour (24)</td>
+                <td scope="col" >Techaer Name</td>
+                <td scope="col" >Language</td>
+                <td scope="col">Capacity</td>
+                <td scope="col" >Studens number</td>
+                <td scope="col" width="50">Delete</td>
+            </tr>
+
+            </thead>
+                <tbody>
+
+                      <ui:repeat value="#{adminController.periods}" var="item">
+                          <tr>
+
+                          <td scope="row" > <h:outputLabel value="#{item.id}" /></td>
+                          <td scope="row" > <h:outputLabel value="#{item.startdate}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.seconddayinweek}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.enddate}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.hour}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.teacher.teachrname}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.language.langname}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.maxstudent}" /></td>
+                            <td scope="row" > <h:outputLabel value="#{item.usersnum}" /></td>
+                              <td scope="row" >
+                                  <h:inputHidden id="hide" value="#{item.id}"></h:inputHidden>
+                                  <h:form>
+                                <h:commandButton  styleClass="btn btn-info btn-block" action="#{adminController.del}"  value="Delete">
+                                    <f:param name="id" value="#{item.id}" />
+
+
+                                </h:commandButton>
+                                  </h:form>
+                            </td>
+                          </tr>
+
+                        </ui:repeat>
+
+                </tbody>
+            </table>
+<br></br>
+<br></br>
+
+
+            <button class="btn btn-primary" onclick="window.location.href = '/logout'">Logout</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/'">Home</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/addteacher'">Add Teacher</button>
+         <!--   <button class="btn btn-primary" onclick="window.location.href = '/addteacher'"></button> -->
+            <h:outputLabel value="#{adminController.error}" styleClass="text-warning"/>
+            #{adminController.setError("")}
+
+        </div>
+    </h:body>
+</f:view>
+</html>

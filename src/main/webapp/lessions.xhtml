@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:t="http://java.sun.com/jsf/html">
+<f:view>
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Index</title>
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+        </link>
+        <script type="text/javascript" src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+
+    </h:head>
+
+    <h:body>
+        <div class="container">
+
+
+            <table class="table table-striped">
+            <thead>
+            <tr>
+
+                <td scope="col" >Lession Name:</td>
+
+
+            </tr>
+
+            </thead>
+            <tbody>
+
+                <ui:repeat value="#{lessionController.lessionSet}" var="item">
+                    <tr>
+                        <td scope="row"><h:outputLabel value="#{item.subject}" /></td>
+
+            </tr>
+                </ui:repeat>
+
+            </tbody>
+            </table>
+            <button class="btn btn-primary" onclick="window.location.href = '/logout'">Logout</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/'">Home</button>
+
+        </div>
+    </h:body>
+</f:view>
+</html>

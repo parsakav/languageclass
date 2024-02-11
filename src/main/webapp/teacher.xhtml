@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:t="http://java.sun.com/jsf/html">
+<f:view>
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Index</title>
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+        </link>
+        <script type="text/javascript" src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+
+    </h:head>
+    <h:body>
+
+        <div class="container-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+
+
+
+                    <td scope="col" >Name</td>
+                    <td scope="col" >Age</td>
+
+                    <td scope="col" >phonenumber</td>
+                    <td scope="col" >Education Level</td>
+                    <td scope="col" >Add</td>
+
+
+                </tr>
+
+                </thead>
+                <tbody>
+                <t:form>
+                    <td scope="row" >
+                        <h:inputText id="name" a:placeholder="Name" value="#{addTeacherController.teachrname}" required="true" >
+                        </h:inputText>
+                    </td>       <td scope="row" >
+                        <h:inputText id="age" a:placeholder="Age" value="#{addTeacherController.age}" required="true" >
+                        </h:inputText>
+                    </td>          <td scope="row" >
+                        <h:inputText id="phonenumber" a:placeholder="Phonenumber" value="#{addTeacherController.phonenumber}" required="true" >
+                        </h:inputText>
+                    </td>       <td scope="row" >
+                        <h:inputText id="edlevel" a:placeholder="Education level" value="#{addTeacherController.educationlevel}" required="true" >
+                        </h:inputText>
+                    </td>
+
+                    <td scope="row" >
+                        <h:commandButton  styleClass="btn btn-info btn-block " action="#{addTeacherController.submit}"  value="Add Teacher">
+                            <f:ajax execute="name" />
+                            <f:ajax execute="age" />
+                            <f:ajax execute="phonenumber"  />
+                            <f:ajax execute="edlevel"  />
+
+
+                        </h:commandButton>
+                    </td>
+
+
+                </t:form>
+
+                </tbody>
+            </table>
+        </div>
+        <br></br>
+        <br></br>
+        <div class="container">
+            <table class="table table-striped">
+            <thead>
+            <tr>
+
+
+
+                <td scope="col" >#</td>
+                <td scope="col" >Name</td>
+                <td scope="col" >Age</td>
+
+                <td scope="col" >phonenumber</td>
+                <td scope="col" >Education Level</td>
+
+            </tr>
+
+            </thead>
+            <tbody>
+            <ui:repeat value="#{addTeacherController.teacherList}" var="item">
+                <tr>
+
+                    <td scope="row" > <h:outputLabel value="#{item.id}" /></td>
+                    <td scope="row" > <h:outputLabel value="#{item.teachrname}" /></td>
+                    <td scope="row" > <h:outputLabel value="#{item.age}" /></td>
+                    <td scope="row" > <h:outputLabel value="#{item.phonenumber}" /></td>
+                    <td scope="row" > <h:outputLabel value="#{item.educationlevel}" /></td>
+
+                </tr>
+            </ui:repeat>
+            </tbody>
+            </table>
+
+            <br></br>
+            <br></br>
+
+
+            <button class="btn btn-primary" onclick="window.location.href = '/logout'">Logout</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/'">Home</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/admin'">Admin Page</button>
+            <h:outputLabel value="#{addTeacherController.error}" styleClass="text-warning"/>
+            #{addTeacherController.setError("")}
+
+        </div>
+
+    </h:body>
+</f:view>
+</html>
